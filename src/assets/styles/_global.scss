@@ -8,6 +8,8 @@ $color-gray-30: #808080ca;
 $color-gray-40: #808080;
 $color-blue: #136AE4;
 $color-danger: #f01;
+$color-red: #FF0000;
+$color-red-opacity-50: rgb(255, 0, 0, 0.7);
 
 
 $family-text: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
@@ -49,6 +51,7 @@ $space-xl: $space-l * 2;//64px
 $icon-size-s: 16px;
 $icon-size: 24px;
 $icon-size-m: 32px;
+$icon-size-l: 48px;
 
 $box-shadow: 0 8px 8px rgba(199, 200, 202, 0.32);
 

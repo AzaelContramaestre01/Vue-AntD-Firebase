@@ -13,6 +13,9 @@
             Añadir
           </a-button>
         </a-col>
+        <div class="firebase-errorMsg">
+          <p v-if="errMsg" class="ant-form-item-explain-error">{{ errMsg }}</p>
+        </div>
       </a-row>
     </a-col>
     <a-col :span="24" class="videos-container">
@@ -40,13 +43,17 @@
     >
       <template v-if="selectedVideo">
         <a-row>
-          <a-col :span="11"
+          <a-col :span="11" class="video-modal-image-container"
             ><img
               :src="selectedVideo.thumbnailHigh"
               alt="selectedVideo.title"
               @click="onOpenYoutubeVideo(selectedVideo.id)"
               class="video-modal-image"
-          /></a-col>
+          />
+          <div class="play-button" @click="onOpenYoutubeVideo(selectedVideo.id)">
+            <caret-right-filled class="play-icon" />
+          </div>
+        </a-col>
           <a-col :span="10" class="video-modal-text">
             <p class="video-modal-title">{{ selectedVideo.title }}</p>
             <p class="video-modal-description">{{ selectedVideo.description }}</p>
@@ -62,13 +69,16 @@
 
 <script lang="ts" setup>
 import { createVNode, ref } from 'vue'
-import { CloseOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue'
+import { CloseOutlined, ExclamationCircleOutlined, CaretRightFilled } from '@ant-design/icons-vue'
 import { Modal } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
 
+
+const errMsg = ref<string>('')
 const visible = ref(false)
 const selectedVideo = ref()
 
-const showSeeVideoModal = (index) => {
+const showSeeVideoModal = (index: number) => {
   try {
     selectedVideo.value = videos.value[index]
     visible.value = true
@@ -112,7 +122,47 @@ const onOpenYoutubeVideo = (videoId) => {
 const value = ref<string>('')
 const videos = ref<Video[]>([])
 
+const checkIfVideoExists = async () => {
+  const videoId = getVideoId(value.value)
+  // @ts-ignore
+  const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
+  const apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet,contentDetails`
+
+  try {
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+
+    if (data.items.length === 0) {
+      return false
+    } else {
+      return true
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const onAddVideo = async () => {
+
+  // if URL is empty or invalid return
+  if (!value.value) {
+    errMsg.value = 'Por favor, introduce una URL válida'
+    return
+  }
+
+  // if the video is already in the list return
+  if (videos.value.some((video) => video.id === getVideoId(value.value))) {
+    errMsg.value = 'Este video ya está en la lista'
+    return
+  }
+
+  // if the video does not exist return
+  if (!(await checkIfVideoExists())) {
+    errMsg.value = 'Este video no existe'
+    return
+  }
+
+  errMsg.value = ''
   const videoId = getVideoId(value.value)
   // @ts-ignore
   const apiKey = import.meta.env.VITE_FIREBASE_API_KEY
@@ -129,7 +179,7 @@ const onAddVideo = async () => {
     const duration = videoData.contentDetails.duration
     let description = videoData.snippet.description
     const descriptionLines = description.split('\n')
-    description = descriptionLines.slice(0, 8).join('\n')
+    description = descriptionLines.slice(0, 4).join('\n')
 
     videos.value.push({
       id: videoId,
@@ -142,6 +192,7 @@ const onAddVideo = async () => {
 
     // Clear input value
     value.value = ''
+    message.success('Video agregado')
   } catch (error) {
     console.error(error)
   }
@@ -149,6 +200,7 @@ const onAddVideo = async () => {
 
 const onDeleteVideo = (index: number) => {
   videos.value.splice(index, 1)
+  message.warning('Video eliminado')
 }
 
 const getVideoId = (url: string): string => {
@@ -271,6 +323,37 @@ const formatDuration = (duration: string): string => {
   max-height: 438px;
   border-radius: $radius-default;
   padding: $space-lg;
+
+  .video-modal-image-container {
+    position: relative;
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background-color: $color-red-opacity-50;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-red;
+      }
+
+      .play-icon {
+        margin-left: $space-xs;
+        font-size: $icon-size-l;
+        color: $color-light;
+      }
+    }
+  }
+
+
   .video-modal-image {
     height: 308px;
     object-fit: cover;
