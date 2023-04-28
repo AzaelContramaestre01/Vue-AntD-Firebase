@@ -22,8 +22,8 @@
 <script setup lang="ts">
 import { ref, defineComponent } from 'vue'
 import router from '../router'
-import Sign from '../components/Sign.vue'
-import SignButtons from '../components/SignButtons.vue'
+import Sign from '../components/Sign/Sign.vue'
+import SignButtons from '../components/Sign/SignButtons.vue'
 import {
   getAuth,
   createUserWithEmailAndPassword,
