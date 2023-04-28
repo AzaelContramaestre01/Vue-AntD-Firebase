@@ -1,0 +1,81 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $family-title;
+  font-weight: $weight-default;
+  letter-spacing: $spacing-title;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: $font-size-l;
+  color: $color-gray;
+  font-weight: $weight-medium;
+}
+
+a {
+  color: $color-gray;
+
+  &:hover {
+    color: $color-blue;
+  }
+}
+
+h2 {
+  font-size: $font-size-l;
+  line-height: $font-size-l;
+  color: $color-dark;
+  font-weight: $weight-medium;
+}
+
+h3 {
+  font-size: $font-size-m;
+  color: $color-gray-40;
+  font-weight: $weight-medium;
+}
+
+p {
+  font-size: $font-size;
+}
+
+.gradient-background {
+  background: rgb(55,55,56);
+background: linear-gradient(322deg, rgba(55,55,56,1) 0%, rgba(51,51,61,1) 100%);
+}
+
+.desktop-resolution {
+  max-width: $desktop-resolution-pixels;
+  margin: 0 auto;
+
+  @media only screen and (max-width: $media-xl) {
+    margin: 0 $space-s;
+  }
+}
+
+.mobile-resolution {
+  max-width: $mobile-resolution-width;
+  padding: $mobile-resolution-padding;
+}
+
+.shadow {
+  box-shadow: $box-shadow;
+}
+
+.image-responsive {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+.input {
+  width: 90%;
+  height: 38px;
+  font-size: $font-size-s;
+
+  @media only screen and (max-width: $media-s) {
+    width: 100%;
+  }
+}

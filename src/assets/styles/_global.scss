@@ -1,0 +1,63 @@
+
+$color-default: #c7c8ca;
+$color-light: #fff;
+$color-dark: #000;
+$color-dark-opacity-50: rgba(0, 0, 0, 0.8);
+$color-gray: #1a1a1a;
+$color-gray-30: #808080ca;
+$color-gray-40: #808080;
+$color-blue: #136AE4;
+$color-danger: #f01;
+
+
+$family-text: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+$family-title: 'Poppins', 'Helvetica', 'Arial', sans-serif;
+$font-size: 1em; // 16px
+$font-size-l: $font-size * 2; // 32px
+$font-size-m: 1.25em; // 20px
+$font-size-s: 0.875em; // 14px
+$font-size-xs: 0.75em; // 12px
+$text-color: $color-gray;
+$weight-default: 400;
+$weight-medium: 500;
+$weight-semi: 600;
+$weight-bold: 700;
+$spacing-title: -0.05em;
+
+$radius-circle: 50%;
+$radius-medium: 16px;
+$radius-default: 6px;
+$radius-small: 2px;
+$radius-border-s: 1px;
+
+$media-xs: 380px;
+$media-sm: 414px;
+$media-s: 576px;
+$media-m: 768px;
+$media-l: 1024px;
+$media-xl: 1200px;
+$media-xxl: 1440px;
+
+$space: 8px;
+$space-xs: 4px;
+$space-s: $space * 2; // 16px
+$space-m: $space * 3; // 24px
+$space-l: $space * 4; // 32px
+$space-lg: $space * 5;// 40px
+$space-xl: $space-l * 2;//64px
+
+$icon-size-s: 16px;
+$icon-size: 24px;
+$icon-size-m: 32px;
+
+$box-shadow: 0 8px 8px rgba(199, 200, 202, 0.32);
+
+$ant-btn-style: none;
+$ant-btn-shadow: none;
+$ant-btn-background: transparent;
+
+$desktop-resolution-pixels: $media-xl;
+$mobile-resolution-width: 100%;
+$mobile-resolution-padding: 0 16px;
+
+$border-default: 1px solid $color-default;
