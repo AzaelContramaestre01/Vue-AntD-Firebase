@@ -20,17 +20,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineComponent } from 'vue'
+import { onMounted, ref, defineComponent } from 'vue'
 import Sign from '../components/Sign/Sign.vue'
 import SignButtons from '../components/Sign/SignButtons.vue'
 import { useFirebaseAuth } from "../composables/useFirebaseAuth"
 import { LogginOptions, FormState } from '../types'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import router from '../router'
 
 defineComponent({
   components: {
     Sign,
     SignButtons
   }
+})
+
+const isLoggedIn = ref(false)
+let auth = ref<any>(getAuth())
+
+// check if user is logged in
+onMounted(() => {
+  auth = getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      router.push('/juice')
+      isLoggedIn.value = true
+    } else {
+      isLoggedIn.value = false
+    }
+  })
 })
 
 const { loading, errMsg, onSignUp, onSignIn, signIniwthGoogle } = useFirebaseAuth()
