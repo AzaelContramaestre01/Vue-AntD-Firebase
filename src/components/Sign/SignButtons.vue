@@ -4,10 +4,10 @@
       <a-radio-group v-model:value="LogValue" @change="onChangeLogValue" size="large">
         <a-row :gutter="16">
           <a-col :span="12"
-            ><a-radio-button :disabled="props.loading" :value="1">Registrarse</a-radio-button></a-col
+            ><a-radio-button :disabled="loading" :value="LogginOptions.REGISTER">Registrarse</a-radio-button></a-col
           >
           <a-col :span="12"
-            ><a-radio-button :disabled="props.loading" :value="2">Iniciar Sesión</a-radio-button></a-col
+            ><a-radio-button :disabled="loading" :value="LogginOptions.LOGIN">Iniciar Sesión</a-radio-button></a-col
           >
         </a-row>
       </a-radio-group>
@@ -17,10 +17,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { LogginOptions } from '../../types'
 
 const emits = defineEmits(['changeLogValue'])
 
-const props = defineProps({
+defineProps({
   loading: {
     type: Boolean,
     default: false

@@ -1,5 +1,5 @@
 <template>
-  <a-row v-if="props.LogValue !== 0" class="register-container gradient-background">
+  <a-row class="register-container gradient-background">
     <a-col :span="24">
       <a-form
         class="form-separator"
@@ -35,8 +35,8 @@
             type="primary"
             html-type="submit"
             class="normal-sign-up-btn"
-            :loading="props.loading"
-            :disabled="props.loading"
+            :loading="loading"
+            :disabled="loading"
             >Enviar</a-button
           >
         </a-form-item>
@@ -44,11 +44,11 @@
     </a-col>
     <a-col :span="24" class="google-sign-up-container">
       <p class="google-sign-up-text">
-        {{ props.LogValue === 1 ? 'O registrate con Google' : 'Iniciar sesión con Google' }}
+        {{ LogValue === LogginOptions.REGISTER ? 'O registrate con Google' : 'Iniciar sesión con Google' }}
       </p>
       <a-button
         type="primary"
-        :disabled="props.loading"
+        :disabled="loading"
         @click="signIniwthGoogle"
         class="google-signup-btn"
       >
@@ -67,28 +67,21 @@
 
 <script setup lang="ts">
 import { reactive, watch } from 'vue'
+import { LogginOptions, FormState } from '../../types'
 
 const emits = defineEmits(['submitForm', 'signIniwthGoogle'])
 
-const props = defineProps({
-  LogValue: {
-    type: Number,
-    required: true
-  },
-  loading: {
-    type: Boolean,
-    required: true
-  },
-  errMsg: {
-    type: String,
-    required: false
-  },
+export interface Props {
+  LogValue: LogginOptions
+  loading: boolean
+  errMsg: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  LogValue: LogginOptions.LOGIN,
+  errMsg: ''
 })
 
-interface FormState {
-  email: string
-  password: string
-}
 
 watch(() => props.LogValue, () => resetFields())
 

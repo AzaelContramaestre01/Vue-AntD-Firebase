@@ -49,10 +49,6 @@ background: linear-gradient(322deg, rgba(55,55,56,1) 0%, rgba(51,51,61,1) 100%);
 .desktop-resolution {
   max-width: $desktop-resolution-pixels;
   margin: 0 auto;
-
-  @media only screen and (max-width: $media-xl) {
-    margin: 0 $space-s;
-  }
 }
 
 .mobile-resolution {

@@ -3,7 +3,7 @@
     <a-layout-content>
       <a-row v-if="isLoggedIn">
         <a-col class="sign-out-container" :span="24">
-          <a @click="handleSignOut" class="sign-out ant-btn"
+          <a @click="handleSignOut" class="sign-out"
             ><user-outlined class="sign-out-icon" />Sign out</a
           ></a-col
         >
@@ -47,9 +47,13 @@ const handleSignOut = () => {
   align-items: center;
   justify-content: end;
 
+  @media screen and (max-width: $media-l) {
+    justify-content: center;
+  }
+
   .sign-out {
     border-radius: 5px;
-    padding: $space-m;
+    padding: $space-xs + 5 $space-m;
     background-color: $color-dark-opacity-50;
     color: $color-default;
     font-weight: $weight-semi;
@@ -77,6 +81,14 @@ const handleSignOut = () => {
     align-items: center;
     min-height: 280px;
     padding: $space-xl;
+
+    @media screen and (max-width: $media-l) {
+      padding: $space-l;
+    }
+
+    @media screen and (max-width: $media-sm) {
+      padding: $space-m;
+    }
   }
 }
 

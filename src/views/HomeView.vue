@@ -21,16 +21,10 @@
 
 <script setup lang="ts">
 import { ref, defineComponent } from 'vue'
-import router from '../router'
 import Sign from '../components/Sign/Sign.vue'
 import SignButtons from '../components/Sign/SignButtons.vue'
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup
-} from 'firebase/auth'
+import { useFirebaseAuth } from "../composables/useFirebaseAuth"
+import { LogginOptions, FormState } from '../types'
 
 defineComponent({
   components: {
@@ -39,91 +33,22 @@ defineComponent({
   }
 })
 
-let loading = ref<boolean>(false)
-const LogValue = ref<number>(0)
-const errMsg = ref<string>('')
+const { loading, errMsg, onSignUp, onSignIn, signIniwthGoogle } = useFirebaseAuth()
 
-const changeLogValue = (value: number) => {
+const LogValue = ref<LogginOptions>(LogginOptions.LOGIN)
+
+const changeLogValue = (value: LogginOptions) => {
   LogValue.value = value
 }
 
-const finishSubmit = (formState) => {
-  if (LogValue.value === 1) {
+const finishSubmit = (formState: FormState) => {
+  if (LogValue.value === LogginOptions.REGISTER) {
     onSignUp(formState)
   } else {
     onSignIn(formState)
   }
 }
 
-const onSignUp = (values: any) => {
-  loading.value = true
-  createUserWithEmailAndPassword(getAuth(), values.email, values.password)
-    .then((userCredential) => {
-      // Signed in
-      router.push('/juice')
-      const user = userCredential.user
-      // ...
-    })
-    .catch((error) => {
-      switch (error.code) {
-        case 'auth/email-already-in-use':
-          errMsg.value = 'That email address is already in use!'
-          break
-        case 'auth/invalid-email':
-          errMsg.value = 'Invalid email address format.'
-          break
-        case 'auth/weak-password':
-          errMsg.value = 'Password should be at least 6 characters'
-          break
-        default:
-          errMsg.value = 'Email or password was incorrect'
-          break
-      }
-      setTimeout(() => {
-        loading.value = false
-      }, 500)
-    })
-}
-const onSignIn = (values: any) => {
-  loading.value = true
-  signInWithEmailAndPassword(getAuth(), values.email, values.password)
-    .then((userCredential) => {
-      // Signed in
-      router.push('/juice')
-      const user = userCredential.user
-      // ...
-    })
-    .catch((error) => {
-      switch (error.code) {
-        case 'auth/invalid-email':
-          errMsg.value = 'Invalid email address format.'
-          break
-        case 'auth/user-not-found':
-          errMsg.value = 'User not found.'
-          break
-        case 'auth/wrong-password':
-          errMsg.value = 'Incorrect password.'
-          break
-        default:
-          errMsg.value = 'Email or password was incorrect'
-          break
-      }
-      setTimeout(() => {
-        loading.value = false
-      }, 500)
-    })
-}
-
-const signIniwthGoogle = () => {
-  const provider = new GoogleAuthProvider()
-  signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      router.push('/juice')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
 </script>
 
 <style scoped lang="scss">

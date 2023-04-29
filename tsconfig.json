@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "target": "esnext",
+      "typeRoots": ["node_modules/@types"],
+      "module": "esnext",
+      "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+      "strict": true,
+      "jsx": "preserve",
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "allowSyntheticDefaultImports": true,
+      "useDefineForClassFields": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "noUnusedLocals": true,
+      "strictNullChecks": true,
+      "allowJs": true,
+      "sourceMap": true,
+      "forceConsistentCasingInFileNames": true,
+    },
+  }

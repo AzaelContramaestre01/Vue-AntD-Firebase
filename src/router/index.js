@@ -33,6 +33,7 @@ const getCurrentUser = () => {
 
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    console.log(await getCurrentUser())
     if (await getCurrentUser()) {
       next()
     } else {
