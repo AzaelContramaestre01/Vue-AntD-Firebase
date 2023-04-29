@@ -51,16 +51,23 @@ To open a video, click on it and it will be opened in a Modal.
 ## Credits
 This application was created using the following technologies:
 
-Vue 3
-Ant Design 3
-Firebase
-YouTube API
-Sass
-Less
-Prettier
-Typescript
-Eslint
-License
+- Vue 3
+
+- Ant Design 3
+
+- Firebase
+
+- YouTube API
+
+- Sass
+
+- Less
+
+- Prettier
+
+- Typescript
+
+- Eslint
 
 ## Contact
 If you have any questions or feedback, please feel free to contact me at galaxyhhd@hotmail.com.
