@@ -1,5 +1,5 @@
 # FEXA tech assesment
-## (anagrama para la compañía a la cual realizo esta web)
+## (anagrama para la compañía a la cual realizo esta web) to avoid SEO.
 
 YouTube Video Library
 
@@ -30,6 +30,7 @@ git clone https://github.com/your-username/youtube-video-library.git
 
 ## Install dependencies.
 npm install
+
 Obtain a YouTube API key from the Google Developer Console.
 
 Rename .env.example file to .env and add your API key to the VITE_FIREBASE_API_KEY field.
@@ -63,3 +64,5 @@ License
 
 ## Contact
 If you have any questions or feedback, please feel free to contact me at galaxyhhd@hotmail.com.
+
+Have in mind that main is protected.
