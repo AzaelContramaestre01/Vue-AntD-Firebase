@@ -27,6 +27,7 @@ onMounted(() => {
   auth = getAuth()
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      router.push('/juice')
       isLoggedIn.value = true
     } else {
       isLoggedIn.value = false
