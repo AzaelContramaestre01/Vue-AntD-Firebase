@@ -1,17 +1,25 @@
+import { useRouteQuery } from '@vueuse/router'
+import { useRouter } from 'vue-router'
 import { createVNode, ref } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
-import { ExclamationCircleOutlined} from '@ant-design/icons-vue'
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { Videos } from '../types'
 
 const errMsg = ref<string>('')
 const isVideoModalVisible = ref(false)
 const selectedVideo = ref()
-
 const inputValue = ref<string>('')
 const videos = ref<Videos[]>([])
 
 export const useYoutubeApi = () => {
+  const { push } = useRouter()
+  const search = useRouteQuery('search')
+  const videoId = useRouteQuery('videoId')
+
+  const saveVideoIdInUrl = (id: string) => {
+    push({ query: { videoId: id } })
+  }
 
   const onAddVideo = async () => {
     errMsg.value = ''
@@ -124,6 +132,9 @@ export const useYoutubeApi = () => {
     try {
       selectedVideo.value = videos.value[index]
       isVideoModalVisible.value = true
+
+      // Save the video ID in the URL
+      saveVideoIdInUrl(selectedVideo.value.id)
     } catch (error) {
       console.error(error)
     }
@@ -168,6 +179,15 @@ export const useYoutubeApi = () => {
     }
   }
 
-
-  return { inputValue, videos, errMsg, isVideoModalVisible, selectedVideo, onAddVideo, showSeeVideoModal, showDeleteVideoModal, onOpenYoutubeVideo }
+  return {
+    inputValue,
+    videos,
+    errMsg,
+    isVideoModalVisible,
+    selectedVideo,
+    onAddVideo,
+    showSeeVideoModal,
+    showDeleteVideoModal,
+    onOpenYoutubeVideo
+  }
 }

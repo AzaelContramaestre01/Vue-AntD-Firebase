@@ -35,6 +35,7 @@
 import { useYoutubeApi } from '../../composables/useYoutubeVideo'
 import { CaretRightFilled } from '@ant-design/icons-vue'
 
+
 const emits = defineEmits(['onOpenYoutubeVideo'])
 
 const onOpenYoutubeVideo = (videoId: string) => {

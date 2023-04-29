@@ -10,6 +10,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vueuse/router": "^10.1.0",
     "ant-design-vue": "^3.2.20",
     "firebase": "^9.21.0",
     "typescript": "^5.0.4",
