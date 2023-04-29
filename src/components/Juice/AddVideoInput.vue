@@ -5,7 +5,7 @@
   <a-col :span="24">
     <a-row class="add-video-input-container">
       <a-col :xs="24" :sm="24" :lg="18">
-        <a-input v-model:value="inputValue" placeholder="Añadir" class="input" />
+        <a-input v-model:value="inputValue" placeholder="Añadir" class="input" @keyup.enter="onAddVideo()" />
       </a-col>
       <a-col :xs="24" :sm="24" :lg="6" class="add-video-button-container">
         <a-button type="primary" class="add-video-button" @click="onAddVideo()"> Añadir </a-button>

@@ -33,7 +33,7 @@ const onChangeLogValue = (e: object) => {
   emits('changeLogValue', e.target.value)
 }
 
-const LogValue = ref<number>(0)
+const LogValue = ref(LogginOptions.LOGIN)
 
 </script>
 
