@@ -6,16 +6,11 @@ YouTube Video Library
 ## Description
 You'll need to login first, you can login with email and password or google.
 
-![Screenshot_2](https://user-images.githubusercontent.com/72152743/235280760-1a9166e6-483e-454b-9c73-3751d5fe89a5.png)
-
 After you login you'll be redirected to "/juice" url there's the actual app.
 
 You can sign-out if you want to.
-![Screenshot_4](https://user-images.githubusercontent.com/72152743/235280801-ba87c414-5a0c-400d-9a99-026deea48377.png)
 
 This is a web application that allows you to save YouTube video URLs in a list and view them in a grid format. You can also click the video and open a modal with the title and description, you can click on it again and you will be redirected to youtube.
-
-![Screenshot_3](https://user-images.githubusercontent.com/72152743/235280761-3ac0e9f8-edfc-4e3d-821e-1469a9352dd9.png)
 
 Features
 Save YouTube video URLs in a list
